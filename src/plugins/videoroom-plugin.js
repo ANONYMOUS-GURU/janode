@@ -299,43 +299,44 @@ class VideoRoomHandle extends Handle {
           }
           /* [multistream] */
           else if (message_data.forwarders) {
-            janode_event.data.forwarders = message_data.forwarders.map(f => {
-              const fwd = {
-                host: f.host,
-              };
-              if (f.type === 'audio') {
-                fwd.audio_stream = f.stream_id;
-                fwd.audio_port = f.port;
-                if (typeof f.remote_rtcp_port === 'number') {
-                  fwd.audio_rtcp_port = f.remote_rtcp_port;
-                }
-              }
-              if (f.type === 'video') {
-                fwd.video_stream = f.stream_id;
-                fwd.video_port = f.port;
-                if (typeof f.remote_rtcp_port === 'number') {
-                  fwd.video_rtcp_port = f.remote_rtcp_port;
-                }
-                if (typeof f.substream === 'number') {
-                  fwd.sc_substream_layer = f.substream;
-                }
-              }
-              if (f.type === 'data') {
-                fwd.data_stream = f.stream_id;
-                fwd.data_port = f.port;
-              }
-              if (typeof f.ssrc === 'number') {
-                fwd.ssrc = f.ssrc;
-              }
-              if (typeof f.pt === 'number') {
-                fwd.pt = f.pt;
-              }
-              if (typeof f.srtp === 'boolean') {
-                fwd.srtp = f.srtp;
-              }
+            janode_event.data = message_data;
+            // janode_event.data.forwarders = message_data.forwarders.map(f => {
+            //   const fwd = {
+            //     host: f.host,
+            //   };
+            //   if (f.type === 'audio') {
+            //     fwd.audio_stream = f.stream_id;
+            //     fwd.audio_port = f.port;
+            //     if (typeof f.remote_rtcp_port === 'number') {
+            //       fwd.audio_rtcp_port = f.remote_rtcp_port;
+            //     }
+            //   }
+            //   if (f.type === 'video') {
+            //     fwd.video_stream = f.stream_id;
+            //     fwd.video_port = f.port;
+            //     if (typeof f.remote_rtcp_port === 'number') {
+            //       fwd.video_rtcp_port = f.remote_rtcp_port;
+            //     }
+            //     if (typeof f.substream === 'number') {
+            //       fwd.sc_substream_layer = f.substream;
+            //     }
+            //   }
+            //   if (f.type === 'data') {
+            //     fwd.data_stream = f.stream_id;
+            //     fwd.data_port = f.port;
+            //   }
+            //   if (typeof f.ssrc === 'number') {
+            //     fwd.ssrc = f.ssrc;
+            //   }
+            //   if (typeof f.pt === 'number') {
+            //     fwd.pt = f.pt;
+            //   }
+            //   if (typeof f.srtp === 'boolean') {
+            //     fwd.srtp = f.srtp;
+            //   }
 
-              return fwd;
-            });
+            //   return fwd;
+            // });
           }
 
           janode_event.event = PLUGIN_EVENT.RTP_FWD_STARTED;
